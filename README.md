@@ -203,6 +203,7 @@ Homepage updates are managed through the `_announcements` collection.
 - Archive path: `/announcements/`
 - Detail path: each announcement is published at `/announcements/<slug>/` and shows its own date, pinned badge, and archive backlink automatically
 - Validation path: `scripts/announcement_content_check.sh _announcements` verifies required fields, boolean flags, date parsing, `expires_at` ordering, unique active pinned announcements, and CTA URL shape before preview/release checks
+- Deep edge-case path: `scripts/announcement_edge_case_check.sh .` verifies hidden/expired announcements stay out of Home/archive/search and that Home/archive empty states behave correctly when no active announcement exists
 
 Example:
 
