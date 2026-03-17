@@ -105,7 +105,8 @@ For local validation of this project revision, run the preview server and smoke 
 # 1) Start/reuse preview server
 make preview-up
 
-# 2) Build + smoke checks
+# 2) Build + standard verify
+# (includes smoke/layout/runtime checks + announcement content validation)
 make preview-verify
 
 # 2-1) Optional comprehensive full-site verify
