@@ -3,7 +3,7 @@ PREVIEW_PORT ?= 4012
 PREVIEW_URL ?= http://127.0.0.1:$(PREVIEW_PORT)
 PREVIEW_IMAGE ?= jekyll/jekyll:4.2.0
 
-.PHONY: preview-up preview-build preview-smoke preview-responsive preview-overflow preview-overflow-full preview-nav preview-runtime preview-runtime-full preview-a11y preview-linkcheck preview-structure preview-style-scope preview-inline-style preview-ids preview-meta preview-verify preview-verify-full preview-down preview-recreate preview-info
+.PHONY: preview-up preview-build preview-smoke preview-responsive preview-overflow preview-overflow-full preview-nav preview-runtime preview-runtime-full preview-a11y preview-linkcheck preview-structure preview-style-scope preview-inline-style preview-ids preview-meta preview-announcements preview-verify preview-verify-full preview-down preview-recreate preview-info
 
 preview-up:
 	@if docker ps --format '{{.Names}}' | grep -qx '$(PREVIEW_NAME)'; then \
@@ -61,7 +61,10 @@ preview-ids:
 preview-meta:
 	scripts/metadata_consistency_check.sh _site
 
-preview-verify: preview-build preview-smoke preview-responsive preview-overflow preview-nav preview-runtime preview-a11y preview-linkcheck preview-structure preview-style-scope preview-inline-style preview-ids preview-meta
+preview-announcements:
+	scripts/announcement_content_check.sh _announcements
+
+preview-verify: preview-build preview-smoke preview-responsive preview-overflow preview-nav preview-runtime preview-a11y preview-linkcheck preview-structure preview-style-scope preview-inline-style preview-ids preview-meta preview-announcements
 
 preview-verify-full: preview-verify preview-overflow-full preview-runtime-full
 
@@ -104,6 +107,7 @@ preview-info:
 	@echo "Inline-style check only: make preview-inline-style"
 	@echo "ID uniqueness only: make preview-ids"
 	@echo "Metadata check only: make preview-meta"
+	@echo "Announcement content check only: make preview-announcements"
 	@echo "Stop preview: make preview-down"
 	@echo "Visual checkpoints:"
 	@echo "  1) Hero typography/spacing + CTA alignment"
