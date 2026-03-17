@@ -109,7 +109,7 @@ make preview-up
 make preview-verify
 
 # 2-1) Optional comprehensive full-site verify
-# (includes preview-verify + overflow-full + runtime-full)
+# (includes preview-verify + overflow-full + runtime-full + announcement edge checks)
 make preview-verify-full
 
 # 3) Or run smoke checks only
@@ -152,13 +152,19 @@ make preview-ids
 # 3-8) Or run metadata consistency checks only
 make preview-meta
 
-# 3-9) Or run runtime console/pageerror/requestfailed checks only
+# 3-9) Or run announcement content rule checks only
+make preview-announcements
+
+# 3-10) Or run runtime console/pageerror/requestfailed checks only
 make preview-runtime
 
 # Optional full-site runtime mode (all generated HTML routes in _site)
 make preview-runtime-full
 # Optional timeout/retry tuning for slower environments:
 # RUNTIME_TIMEOUT_MS=90000 RUNTIME_RETRIES=4 make preview-runtime-full
+
+# 3-11) Or run announcement edge-case checks only
+make preview-announcement-edges
 
 # optional: print manual visual checkpoints
 make preview-info
@@ -189,6 +195,8 @@ Smoke checks cover:
 - Source-level core template/page inline-style check (except GTM noscript iframe)
 - Site-wide HTML `id` uniqueness check (duplicate IDs fail)
 - Site-wide metadata consistency check (`title`, description, canonical, og:url/og:title, twitter:title)
+- Announcement content rule check (`_announcements` required fields, booleans, date parsing, `expires_at` ordering, unique active pinned announcement, CTA URL shape)
+- Announcement edge-case check (hidden/expired announcement filtering + no-active announcement Home/archive empty-state behavior)
 
 ## Announcement Content Flow
 
