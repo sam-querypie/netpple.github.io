@@ -5,6 +5,7 @@ BASE_URL="${1:-http://127.0.0.1:4012}"
 
 routes=(
   "/"
+  "/announcements/"
   "/news/"
   "/docs/"
   "/about/"
@@ -24,6 +25,7 @@ sample_doc="/docs/istio-in-action"
 sample_doc_detail="/docs/istio-in-action/Istio-ch11-performance"
 sample_doc_hands_on="/docs/querypie-handson/multiple-kubernetes-with-querypie-kac"
 key_nav_paths=(
+  "/announcements/"
   "/2023/c-for-beginner-hongongc/"
   "/2023/k8s-1.26-install/"
   "/docs/istio-in-action/"
@@ -203,7 +205,8 @@ for route in "${routes[@]}"; do
 done
 
 echo "[smoke] checking key page redesign markers"
-assert_route_contains "/" 'home-hero|home-stats|home-track-grid' "home redesign markers"
+assert_route_contains "/" 'home-hero|home-stats|home-track-grid|home-announcement' "home redesign markers"
+assert_route_contains "/announcements/" 'Announcement|현재 노출 중인 공지|entry-card--news' "announcements markers"
 assert_route_contains "/news/" 'entry-card--news' "news list card markers"
 assert_route_contains "/docs/" 'track-grid|entry-card--doc' "docs hub markers"
 assert_route_contains "/about/" 'section-heading__kicker\">Interests|chip-row' "about redesign markers"
@@ -249,6 +252,7 @@ done
 
 echo "[smoke] checking active nav mapping"
 assert_active_nav "/" "/"
+assert_active_nav "/announcements/" "/"
 assert_active_nav "/news/" "/news/"
 assert_active_nav "/docs/" "/docs/"
 assert_active_nav "/about/" "/about/"

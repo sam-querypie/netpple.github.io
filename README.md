@@ -189,3 +189,13 @@ Smoke checks cover:
 - Source-level core template/page inline-style check (except GTM noscript iframe)
 - Site-wide HTML `id` uniqueness check (duplicate IDs fail)
 - Site-wide metadata consistency check (`title`, description, canonical, og:url/og:title, twitter:title)
+
+## Announcement Content Flow
+
+Homepage updates are managed through the `_announcements` collection.
+
+- Required front matter: `title`, `summary`, `date`, `cta_label`, `cta_url`, `pinned`, `published`
+- Optional front matter: `description`, `expires_at`, `excluded_in_search`
+- Home rendering rules: show one active pinned announcement first, then up to two newer active items as secondary links
+- Visibility rules: items with `published: false` or an `expires_at` earlier than the build time are hidden from Home, archive, and search
+- Archive path: `/announcements/`
