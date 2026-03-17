@@ -236,4 +236,4 @@ Operating lifecycle:
 - Pin: keep `pinned: true` on only one active announcement at a time
 - Hide: switch to `published: false` if the notice should disappear immediately
 - Expire: set `expires_at` when the notice should stop showing automatically after a deadline
-- Archive only: leave `published: true`, set `pinned: false`, and remove `expires_at` if the notice should stay reachable but no longer lead Home
+- Archive-only note: there is no dedicated archive-only flag today. An active unpinned notice may still appear in the Home secondary list while it is recent.
