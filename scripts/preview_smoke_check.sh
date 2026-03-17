@@ -242,6 +242,7 @@ assert_route_not_contains "${sample_doc}" 'All News' "news-only backlink in docs
 assert_route_not_contains "${sample_doc_detail}" 'All News' "news-only backlink in docs detail"
 assert_route_not_contains "${sample_doc_hands_on}" 'All News' "news-only backlink in docs detail"
 assert_route_contains "${sample_announcement}" '무엇이 바뀌었나|바로 둘러보기' "announcement content headings"
+assert_route_contains "${sample_announcement}" '모든 공지 보기|Pinned' "announcement detail meta row"
 assert_route_contains "/" '2026\.03\.17|2023\.06\.11|2023\.05\.01' "expected home announcement/post dates"
 assert_route_contains "/announcements/" '2026\.03\.17' "expected announcement archive date"
 assert_route_contains "${sample_announcement}" '2026\.03\.17' "expected announcement detail date"
